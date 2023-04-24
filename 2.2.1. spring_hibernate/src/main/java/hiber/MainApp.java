@@ -4,6 +4,7 @@ import hiber.config.AppConfig;
 import hiber.model.Car;
 import hiber.model.User;
 import hiber.service.UserService;
+import jakarta.persistence.NoResultException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
@@ -44,7 +45,10 @@ public class MainApp {
             System.out.println();
          }
       }
-      System.out.println(userService.getUserByCarCharacter("kia",9999).toString());
+      try {System.out.println(userService.getUserByCarCharacter("kia",9999).toString());
+      } catch (NoResultException e) {
+         System.out.println("Пользователя с такой машиной не существует");
+      }
 
       context.close();
    }
